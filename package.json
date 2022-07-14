@@ -16,7 +16,8 @@
     "url": "https://github.com/guigitH/testcafe-circleCI/issues"
   },
   "homepage": "https://github.com/guigitH/testcafe-circleCI#readme",
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
     "testcafe": "^1.19.0"
   }
 }
