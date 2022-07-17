@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test:headless": "testcafe chrome:headless tests/example/example.ts",
+    "test": "testcafe chrome tests/example/example.ts"
   },
   "repository": {
     "type": "git",
