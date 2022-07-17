@@ -1,18 +1,18 @@
 import { getLocation } from '../helpers/GetLocation'
 
 class BasePage {
-    public test: TestController
+    protected controller: TestController
 
-    constructor(test: TestController) {
-        this.test = test
+    constructor(controller: TestController) {
+        this.controller = controller
     }
 
     public async setNativeHandler(): Promise<TestControllerPromise> {
-        await this.test.setNativeDialogHandler(() => true)
+        await this.controller.setNativeDialogHandler(() => true)
     }
 
     public async confirmUrl(url: string): Promise<TestControllerPromise> {
-        await this.test.expect(getLocation()).eql(url)
+        await this.controller.expect(getLocation()).eql(url)
     }
 }
 

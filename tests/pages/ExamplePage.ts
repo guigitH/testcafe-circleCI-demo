@@ -2,15 +2,15 @@ import BasePage from "./BasePage";
 import { Selector } from "testcafe";
 
 class ExamplePage extends BasePage {
-    public populate = Selector('input[id=populate]')
-    public submit = Selector('button[id=submit-button]')
+    private populate = Selector('input[id=populate]')
+    private submit = Selector('button[id=submit-button]')
 
     public async clickPopulate(): Promise<TestControllerPromise> {
-        await this.test.click(this.populate)
+        await this.controller.click(this.populate)
     }
 
     public async clickSubmit(): Promise<TestControllerPromise> {
-        await this.test.click(this.submit)
+        await this.controller.click(this.submit)
     }
 }
 
