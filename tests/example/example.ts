@@ -24,11 +24,10 @@ test.meta({id: "1657929369"})('User cannot submit the form without valid data', 
     await examplePage.confirmUrl(URL.example)
 });
 
-test.meta({id: "1657929369"})('', async t => {
-});
-
-test.meta({id: "1657929369"})('', async t => {
-});
-
-test.meta({id: "1657929369"})('', async t => {
+test.meta({id: "1657929369"})
+    .page(`${URL.thankYou}`)
+    .requestHooks(ThankYouPage.errorCssResponse)
+    ('Html page can be loaded with css error response', async t => {
+    const thankYouPage = new ThankYouPage(t)
+    await thankYouPage.confirmHeaderText('Thank you')
 });
