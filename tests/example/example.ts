@@ -1,10 +1,33 @@
 import { Selector } from 'testcafe';
+import ExamplePage from '../pages/ExamplePage';
+import ThankYouPage from '../pages/ThankYouPage';
+import { URL } from '../constants/Url';
 
 fixture `Examples of tests`
-    .page `http://devexpress.github.io/testcafe/example`;
+    .page `${URL.example}`;
 
-test('Enter name and click populate', async t => {
-    await t.typeText('input[id=developer-name', 'Peter Clark')
-    await t.setNativeDialogHandler(() => true)
-    await t.click('input[id=populate]')
+test.meta({id: "1657929369"})('User can populate a name and submit the form', async t => {
+    const examplePage = new ExamplePage(t)
+    const thankYouPage = new ThankYouPage(t)
+
+    await examplePage.setNativeHandler()
+    await examplePage.clickPopulate()
+    await examplePage.clickSubmit()
+    await thankYouPage.confirmHeaderText('Thank you, Peter Parker!')
+});
+
+
+test.meta({id: "1657929369"})('User cannot submit the form without valid data', async t => {
+    const examplePage = new ExamplePage(t)
+
+    await examplePage.clickSubmit()
+    await examplePage.confirmUrl(URL.example)
+});
+
+test.meta({id: "1657929369"})
+    .page(`${URL.thankYou}`)
+    .requestHooks(ThankYouPage.errorCssResponse)
+    ('Html page can be loaded with css error response', async t => {
+    const thankYouPage = new ThankYouPage(t)
+    await thankYouPage.confirmHeaderText('Thank you')
 });
