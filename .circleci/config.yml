@@ -2,11 +2,16 @@
 version: 2.1
 
 jobs:
+  install:
+    docker:
+      - image: cimg/base:stable    
+    steps:
+      - checkout
+      - run: npm install
   functional_test:
     docker:
       - image: cimg/base:stable
     steps:
-      - checkout
       - run:
           name: "Run example tests"
           command: npm run test:headless
@@ -18,4 +23,7 @@ workflows:
           filters:
             branches:
               only: /feature\d+/
-      - functional_test
+      - functional_test:
+          requires:
+            - install
+
