@@ -12,9 +12,7 @@ jobs:
       - checkout
       - run: node --version
       - node/install-packages:
-          app-dir: ~/testcafe-circleCI
-          cache-path: node_modules
-          override-ci-command: npm i
+          pkg-manager: npm
       - persist_to_workspace:
           root: .
           paths:
