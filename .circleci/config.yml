@@ -6,16 +6,19 @@ orbs:
 
 commands:
   install_npm_packages:
-    - node/install-packages:
-        pkg-manager: npm
+    steps:
+      - node/install-packages:
+          pkg-manager: npm
   check_chrome_install:
-    - run:
-        name: Check chrome install      
-        command: google-chrome --version
+    steps:
+      - run:
+          name: Check chrome install      
+          command: google-chrome --version
   run_headless_test:
-    - run:
-        name: "Run example tests"
-        command: npm run test:headless        
+    steps:
+      - run:
+          name: "Run example tests"
+          command: npm run test:headless        
 
 jobs:
   install:
