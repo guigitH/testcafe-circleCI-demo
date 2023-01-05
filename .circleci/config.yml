@@ -5,7 +5,8 @@ orbs:
 
 executors:
   my-executor:
-    executor: node/default
+    docker:
+      - image: 'cimg/base:stable'
     working_directory: /tmp  
 
 jobs:
