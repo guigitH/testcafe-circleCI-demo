@@ -3,22 +3,26 @@ version: 2.1
 orbs:
   node: circleci/node@5.0.2
 
+executors:
+  my-executor:
+    executor: node/default
+    working_directory: /tmp  
+
 jobs:
   install:
-    executor: node/default
-    working_directory: /tmp
+    executor: my-executor
     steps:
       - checkout
       - run: npm install
       - persist_to_workspace:
-        root: .
+        root: /tmp
         paths:
-          - .
+          - /tmp
   functional_test:
-    executor: node/default
+    executor: my-executor
     steps:
       - attach_workspace:
-          at: .      
+          at: /tmp     
       - checkout
       - run:
           name: "Run example tests"
