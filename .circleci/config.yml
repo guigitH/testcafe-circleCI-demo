@@ -3,27 +3,26 @@ version: 2.1
 orbs:
   node: circleci/node@5.0.2
 
-executors:
-  my-executor:
-    docker:
-      - image: 'cimg/base:stable'
-    working_directory: /tmp  
-
 jobs:
   install:
-    executor: my-executor
+    executor: node/default
+    working_directory: ~/testcafe-circleCI
     steps:
       - checkout
-      - run: npm install
+      - node/install-npm
+      - node/install-packages:
+          app-dir: ~/testcafe-circleCI
+          cache-path: node_modules
+          override-ci-command: npm i
       - persist_to_workspace:
-        root: /tmp
-        paths:
-          - /tmp
+          root: .
+          paths:
+            - .          
   functional_test:
-    executor: my-executor
+    executor: node/default
     steps:
       - attach_workspace:
-          at: /tmp     
+          at: .     
       - checkout
       - run:
           name: "Run example tests"
