@@ -9,9 +9,15 @@ jobs:
     steps:
       - checkout
       - run: npm install
+      - persist_to_workspace:
+        root: .
+        paths:
+          - .
   functional_test:
     executor: node/default
     steps:
+      - attach_workspace:
+          at: .      
       - checkout
       - run:
           name: "Run example tests"
