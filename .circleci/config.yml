@@ -2,11 +2,11 @@ version: 2.1
 
 orbs:
   node: circleci/node@5.0.2
-  working_directory: /tmp
 
 jobs:
   install:
-    executor: node/default   
+    executor: node/default
+    working_directory: /tmp
     steps:
       - checkout
       - run: npm install
