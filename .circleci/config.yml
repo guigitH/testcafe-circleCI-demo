@@ -14,6 +14,11 @@ commands:
       - run:
           name: Check chrome install      
           command: google-chrome --version
+  check_node_version:
+    steps:
+      - run:
+        name: Check node version
+        command: node -version
   run_headless_test:
     steps:
       - run:
@@ -26,7 +31,7 @@ jobs:
     working_directory: ~/testcafe-circleCI
     steps:
       - checkout
-      - run: node --version
+      - check_node_version
       - install_npm_packages
       - persist_to_workspace:
           root: .
