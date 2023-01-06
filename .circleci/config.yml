@@ -18,7 +18,7 @@ commands:
     steps:
       - run:
           name: Check node version
-          command: node -version
+          command: node --version
   run_headless_test:
     steps:
       - run:
