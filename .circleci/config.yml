@@ -19,11 +19,16 @@ commands:
       - run:
           name: Check node version
           command: node --version
-  run_headless_test:
+  run_basic_headless_test:
     steps:
       - run:
-          name: "Run example tests"
-          command: npm run test:headless        
+          name: "Run basic example tests"
+          command: npm run testcafe chrome:headless tests/example/exampleBasic.ts
+  run_mock_headless_test:
+    steps:
+      - run:
+          name: "Run mock example tests"
+          command: npm run testcafe chrome:headless tests/example/exampleMock.ts          
 
 jobs:
   install:
@@ -37,7 +42,7 @@ jobs:
           root: .
           paths:
             - .          
-  functional_test:
+  functional_test_basic:
     executor: node/default
     steps:
       - attach_workspace:
@@ -45,14 +50,26 @@ jobs:
       - checkout
       - browser-tools/install-chrome
       - check_chrome_install
-      - run_headless_test
+      - run_basic_headless_test
+  functional_test_mock:
+    executor: node/default
+    steps:
+      - attach_workspace:
+          at: .
+      - checkout
+      - browser-tools/install-chrome
+      - check_chrome_install
+      - run_mock_headless_test      
 
 
 workflows:
   all_branch:
     jobs:
       - install
-      - functional_test:
+      - functional_test_basic:
           requires:
             - install
+      - functional_test_mock:
+          requires:
+            - install            
 
