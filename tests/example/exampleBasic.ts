@@ -2,7 +2,7 @@ import ExamplePage from '../pages/ExamplePage';
 import ThankYouPage from '../pages/ThankYouPage';
 import { URL } from '../constants/Url';
 
-fixture `Examples of tests`
+fixture `Examples of basic tests`
 	.page `${URL.example}`;
 
 test.meta({id: '1657929369'})('User can populate a name and submit the form', async t => {
@@ -16,16 +16,9 @@ test.meta({id: '1657929369'})('User can populate a name and submit the form', as
 });
 
 
-test.meta({id: '1657929369'})('User cannot submit the form without valid data', async t => {
+test.meta({id: '1657929370'})('User cannot submit the form without valid data', async t => {
 	const examplePage = new ExamplePage(t);
 
 	await examplePage.clickSubmit();
 	await examplePage.confirmUrl(URL.example);
 });
-
-test.meta({id: '1657929369'})
-	.page(`${URL.thankYou}`)
-	.requestHooks(ThankYouPage.errorCssResponse)('Html page can be loaded with css error response', async t => {
-		const thankYouPage = new ThankYouPage(t);
-		await thankYouPage.confirmHeaderText('Thank you');
-	});

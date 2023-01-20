@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test:headless": "testcafe chrome:headless tests/example/example.ts",
-    "test": "testcafe chrome tests/example/example.ts",
+    "test:headless": "testcafe chrome:headless tests/example/*.ts",
+    "test": "testcafe chrome tests/example/*.ts",
     "lint": "npx eslint . --ext .ts",
     "lint:fix": "npx eslint . --ext .ts --fix"
   },
