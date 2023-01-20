@@ -13,6 +13,15 @@ cd testcafe-examples
 3. Install the dependencies:
 npm install
 
-
 # Usage
 Use the `npm run test` script to run all tests in Chrome or `npm run test:headless` for headless.
+
+# CircleCI
+
+1. Sign up and try CircleCI for free, you can directly link your github account and start using CircleCI:
+https://circleci.com/docs/first-steps/
+
+2. Push any new commit to trigger the workflow on CircleCI
+
+The configuration can be found in `.circleci/config.yml`, functional tests are run in parallel as demo for concurrency
+Link your github account to CircleCI and push to your remote server to trigger CircleCI pipelines. 
