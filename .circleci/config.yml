@@ -23,12 +23,12 @@ commands:
     steps:
       - run:
           name: "Run basic example tests"
-          command: testcafe --version
+          command: npm run testBasic:headless
   run_mock_headless_test:
     steps:
       - run:
           name: "Run mock example tests"
-          command: testcafe "chrome:headless" tests/example/exampleMock.ts          
+          command: npm run testMock:headless   
 
 jobs:
   install:

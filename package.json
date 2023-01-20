@@ -5,6 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test:headless": "testcafe chrome:headless tests/example/*.ts",
+    "testBasic:headless": "testcafe chrome:headless tests/example/exampleBasic.ts",
+    "testMock:headless": "testcafe chrome:headless tests/example/exampleMock.ts",
     "test": "testcafe chrome tests/example/*.ts",
     "lint": "npx eslint . --ext .ts",
     "lint:fix": "npx eslint . --ext .ts --fix"
