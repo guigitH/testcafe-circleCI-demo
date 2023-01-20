@@ -23,5 +23,8 @@ https://circleci.com/docs/first-steps/
 
 2. Push any new commit to trigger the workflow on CircleCI
 
-The configuration can be found in `.circleci/config.yml`, functional tests are run in parallel as demo for concurrency
-Link your github account to CircleCI and push to your remote server to trigger CircleCI pipelines. 
+## Configuration
+
+1. We currently use the `node@5.0.2` orbs because it provibe reusable packages of parameterizable configuration.
+2. The configuration can be found in `.circleci/config.yml`. 
+3. Functional tests are run in parallel as demo for concurrency.
