@@ -1,26 +1,75 @@
-# Use the latest 2.1 version of CircleCI pipeline process engine.
-# See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
 
-# Define a job to be invoked later in a workflow.
-# See: https://circleci.com/docs/2.0/configuration-reference/#jobs
+orbs:
+  node: circleci/node@5.0.2
+  browser-tools: circleci/browser-tools@1.4.0
+
+commands:
+  install_npm_packages:
+    steps:
+      - node/install-packages:
+          pkg-manager: npm
+  check_chrome_install:
+    steps:
+      - run:
+          name: Check chrome install      
+          command: google-chrome --version
+  check_node_version:
+    steps:
+      - run:
+          name: Check node version
+          command: node --version
+  run_basic_headless_test:
+    steps:
+      - run:
+          name: "Run basic example tests"
+          command: npm run testBasic:headless
+  run_mock_headless_test:
+    steps:
+      - run:
+          name: "Run mock example tests"
+          command: npm run testMock:headless   
+
 jobs:
-  say-hello:
-    # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
-    # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
-    docker:
-      - image: cimg/base:stable
-    # Add steps to the job
-    # See: https://circleci.com/docs/2.0/configuration-reference/#steps
+  install:
+    executor: node/default
+    working_directory: ~/testcafe-circleCI
     steps:
       - checkout
-      - run:
-          name: "Say hello"
-          command: "echo Hello, World!"
+      - check_node_version
+      - install_npm_packages
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .          
+  functional_test_basic:
+    executor: node/default
+    steps:
+      - attach_workspace:
+          at: .
+      - checkout
+      - browser-tools/install-chrome
+      - check_chrome_install
+      - run_basic_headless_test
+  functional_test_mock:
+    executor: node/default
+    steps:
+      - attach_workspace:
+          at: .
+      - checkout
+      - browser-tools/install-chrome
+      - check_chrome_install
+      - run_mock_headless_test      
 
-# Invoke jobs via workflows
-# See: https://circleci.com/docs/2.0/configuration-reference/#workflows
+
 workflows:
-  say-hello-workflow:
+  all_branch:
     jobs:
-      - say-hello
+      - install
+      - functional_test_basic:
+          requires:
+            - install
+      - functional_test_mock:
+          requires:
+            - install            
+

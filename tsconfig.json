@@ -1,4 +1,7 @@
 {
-    "compilerOptions": {},
+    "compilerOptions": {
+        "noImplicitAny": true,
+        "strictNullChecks": true,
+    },
     "include": ["tests"]
 }
